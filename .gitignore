@@ -2,7 +2,11 @@
 *.terraform
 *.terraform.lock.hcl
 *.tfstate
+*.tfvars
 *.tfstate.backup
-*.tfstate.
+*.tfstate.*
+
+# Ignore transient lock info files created by terraform apply
+.terraform.tfstate.lock.info
 
 /terraform.tfstate.backup
