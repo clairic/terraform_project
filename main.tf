@@ -33,3 +33,18 @@ resource "azurerm_virtual_network" "vnet" {
   location            = "northeurope"
   resource_group_name = azurerm_resource_group.rg.name
 }
+
+#Creating a storage account with the cheapest SKUs
+
+resource "azurerm_storage_account" "storageacc" {
+  name                     = "azdemostoracc"
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = "northeurope"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  tags = {
+    environment = "staging"
+    location = "North Europe"
+  }
+}
