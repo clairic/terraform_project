@@ -2,10 +2,8 @@
 In this demo project I will be creating a web app using Terraform (IaC) on Microsoft Azure. 
 
 ### Project Diagram
-This is a demo diagram I have created to start working on the project. It will change and it will certainly get better. ☺️
+There is a demo diagram in the .drawio I have created. I will add a ton of stuff so it will certainly change a lot. 
 
-
-![Project Diagram](diagram/infra.png)
 
 ### To-do tasks 
 1. Create a resource group with the name "rg-kalliopi-tsiampa" on Azure ✅
