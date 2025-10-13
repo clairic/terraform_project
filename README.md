@@ -17,7 +17,7 @@ This is a demo diagram I have created to start working on the project. It will c
 7. Connect the different resources with each other correctly 
 
 ### Resources that will be used
-- 'Resource Group' A container in Azure that holds related resources like virtual machines, databases, and networks, allowing us to manage them together.
+- 'Resource Group': A container in Azure that holds related resources like virtual machines, databases, and networks, allowing us to manage them together.
 - 'Virtual Network' A private network that lets Azure resources securely communicate with each other, the internet, and on-premises networks.
 - 'Storage Account' A service that provides scalable cloud storage for data like blobs, files, queues, and tables.
 - 'Azure App Service Plan' In Azure, an App Service Plan defines the region, pricing tier, and compute resources used to run web apps, APIs, and functions.
