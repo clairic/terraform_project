@@ -2,7 +2,9 @@
 In this demo project I will be creating a web app using Terraform (IaC) on Microsoft Azure. 
 
 # Diagram
-This is a demo diagram I have created to start working on the project. It will change and it will certainly get better ☺️
+This is a demo diagram I have created to start working on the project. It will change and it will certainly get better. ☺️
+
+
 ![Project Diagram](diagram/infra.png)
 
 # To-do tasks 
