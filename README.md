@@ -3,7 +3,7 @@ In this demo project I will be creating a web app using Terraform (IaC) on Micro
 
 # Diagram
 This is a demo diagram I have created to start working on the project. It will change and it will certainly get better ☺️
-![Project Diagram]diagram/infra.png
+![Project Diagram](diagram/infra.png)
 
 # To-do tasks 
 1. Create a resource group with the name "rg-kalliopi-tsiampa" on Azure
