@@ -14,7 +14,6 @@ provider "azurerm" {
   features {}
 }
 
-
 #creating a resource group
 resource "azurerm_resource_group" "rg" {
   name     = "rg-kalliopi-tsiampa"
@@ -25,7 +24,6 @@ resource "azurerm_resource_group" "rg" {
     location = "northeurope"
   }
 }
-
 #Create a virtual network inside the resource group
 resource "azurerm_virtual_network" "vnet" {
   name                = "demoVnet"
