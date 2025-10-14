@@ -34,8 +34,31 @@ resource "azurerm_virtual_network" "vnet" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-#Creating a storage account with the cheapest SKUs
+#Creating a subnet for the web app
+resource "azurerm_subnet" "webappsubnet"{
+name = "webapp_subnet"
+resource_group_name = azurerm_resource_group.rg.name
+virtual_network_name = azurerm_virtual_network.vnet.name
+address_prefixes = ["10.0.1.0/24"]
+}
 
+#Creating a subnet for the sql database and server
+resource "azurerm_subnet" "sqlsubnet"{
+  name = "sql_subnet"
+  resource_group_name = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes = ["10.0.2.0/24"]
+}
+
+#Creating a subnet for the keyvault
+resource "azurerm_subnet" "keyvaultsubnet"{
+  name = "keyvault_subnet"
+  resource_group_name = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name 
+  address_prefixes = ["10.0.3.0/24"]
+}
+
+#Creating a storage account with the cheapest SKUs
 resource "azurerm_storage_account" "storageacc" {
   name                     = "azdemostoracc"
   resource_group_name      = azurerm_resource_group.rg.name
