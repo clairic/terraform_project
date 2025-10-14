@@ -9,7 +9,7 @@ There is a demo diagram in the .drawio I have created. I will add a ton of stuff
 1. Create a resource group with the name "rg-kalliopi-tsiampa" on Azure ✅
 2. Create a Virtual Network (Vnet) with the name "demoVnet" ✅
 3. Create a Storage Account with the name "azdemostoracc" ✅
-4. Create subnets, one for the web app (webapp_subnet), one for the sql database (db_subnet), one for the keyvault (keyvault_subnet) 
+4. Create subnets, one for the web app (webapp_subnet), one for the sql database (db_subnet), one for the keyvault (keyvault_subnet) ✅
 5. Create Private Endpoints to ensure privacy and block unauthorized access.
 6. Use Role Based Access (RBAC) to allow access to whomever needs it and block access from others
 7. Connect the different resources with each other correctly 
