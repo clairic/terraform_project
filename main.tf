@@ -59,10 +59,41 @@ resource "azurerm_subnet" "keyvaultsubnet"{
 #Creating a storage account with the cheapest SKUs
 resource "azurerm_storage_account" "storageacc" {
   name                     = "azdemostoracc"
-  resource_group_name      = azurerm_resource_group.rg.name
+  resource_group_name = azurerm_resource_group.rg.name
   location                 = "northeurope"
   account_tier             = "Standard"
   account_replication_type = "LRS"
+
+  tags = {
+    environment = "staging"
+    location = "North Europe"
+  }
+}
+
+#Creating an SQL server and a database inside the resource group and the sql_subnet subnet I created before
+resource "azurerm_mssql_server" "sqlserver" {
+  name                         = "azdemosqlserver"
+  resource_group_name          = azurerm_resource_group.rg.name
+  location                     = "northeurope"
+  version                      = "12.0"
+  administrator_login          = "sqladminuser"
+  administrator_login_password = "H@Sh1CoR3!"
+
+  tags = {
+    environment = "staging"
+    location = "North Europe"
+  }
+}
+
+resource "azurerm_mssql_database" "sqldatabase" {
+  name      = "azdemosqldb"
+  server_id = azurerm_mssql_server.sqlserver.id
+  
+  # Use sku_name instead of edition for service tier
+  sku_name = "Basic"
+  
+  # Optional: Set max size (in GB)
+  max_size_gb = 2
 
   tags = {
     environment = "staging"
