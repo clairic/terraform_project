@@ -17,6 +17,7 @@ There is a demo diagram in the .drawio I have created. I will add a ton of stuff
 ### Resources that will be used
 - `Resource Group`: A container in Azure that holds related resources like virtual machines, databases, and networks, allowing us to manage them together.
 - `Virtual Network`: A private network that lets Azure resources securely communicate with each other, the internet, and on-premises networks.
+- `Private Endpoints`: A network interface that connects you privately to an Azure service over your Virtual Network, using a private IP address instead of a public one.
 - `Storage Account`: A service that provides scalable cloud storage for data like blobs, files, queues, and tables.
 - `Azure App Service Plan`: In Azure, an App Service Plan defines the region, pricing tier, and compute resources used to run web apps, APIs, and functions.
 - `Azure App Service`: A platform for building, hosting, and scaling web apps, REST APIs, and mobile backends without managing infrastructure.
