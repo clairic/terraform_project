@@ -24,6 +24,27 @@ resource "azurerm_resource_group" "rg" {
     location = "northeurope"
   }
 }
+
+#Creating an app service plan inside the resource group for a web app
+// ...existing code...
+#Creating an app service plan inside the resource group for a web app
+resource "azurerm_service_plan" "app_service_plan" {
+  name                = "app-service-plan-kalliopi"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  
+  # Required: Operating system type
+  os_type = "Linux"  
+  
+  # Required: SKU name (replaces the old sku block)
+  sku_name = "B1"
+  
+  tags = {
+    Environment = "Terraform Getting Started"
+    location = "northeurope"
+  }
+}
+
 #Create a virtual network inside the resource group
 resource "azurerm_virtual_network" "vnet" {
   name                = "demoVnet"
@@ -72,7 +93,7 @@ resource "azurerm_storage_account" "storageacc" {
 
 #Creating an SQL server and a database inside the resource group and the sql_subnet subnet I created before
 resource "azurerm_mssql_server" "sqlserver" {
-  name                         = "azdemosqlserver"
+  name                         = "sqlserverkalliopitsiampa"
   resource_group_name          = azurerm_resource_group.rg.name
   location                     = "northeurope"
   version                      = "12.0"
