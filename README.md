@@ -12,11 +12,12 @@ There is a demo diagram in the .drawio I have created. I will add a ton of stuff
 4. Create subnets in the same Vnet (demoVnet), one for the web app (webapp_subnet), one for the sql database (sql_subnet), one for the keyvault (keyvault_subnet) ✅
 5. Create an App Service Plan ✅
 6. Create an SQL Server and a database ✅ 
-7. Create a Key Vault
-8. Put each of the resources in the correct subnets I have set up earlier 
-9. Create Private Endpoints to ensure privacy and block unauthorized access
-10. Use Role Based Access (RBAC) to allow access to whomever needs it and block access from others
-11. Connect the website I have created using React with the Azure SQL database
+7. Refactor the Terraform code into modules for reusability and maintainability. (wip) 🚧
+8. Create a Key Vault
+9. Put each of the resources in the correct subnets I have set up earlier 
+10. Create Private Endpoints to ensure privacy and block unauthorized access
+11. Use Role Based Access (RBAC) to allow access to whomever needs it and block access from others
+12. Connect the website I have created using React with the Azure SQL database
 
 ### Resources that will be used
 - `Resource Group`: A container in Azure that holds related resources like virtual machines, databases, and networks, allowing us to manage them together.
