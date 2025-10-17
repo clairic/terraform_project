@@ -1,5 +1,5 @@
 # Azure Web App deployment using Terraform
-In this demo project I will be creating a web app using Terraform (IaC) on Microsoft Azure. 
+In this demo project I will be using Terraform (IaC) to deploy a web app I have created on Microsoft Azure. 
 
 ### Project Diagram
 There is a demo diagram in the .drawio I have created. I will add a ton of stuff so it will certainly change a lot. 
@@ -10,9 +10,13 @@ There is a demo diagram in the .drawio I have created. I will add a ton of stuff
 2. Create a Virtual Network (Vnet) with the name "demoVnet" ✅
 3. Create a Storage Account with the name "azdemostoracc" ✅
 4. Create subnets in the same Vnet (demoVnet), one for the web app (webapp_subnet), one for the sql database (sql_subnet), one for the keyvault (keyvault_subnet) ✅
-5. Create Private Endpoints to ensure privacy and block unauthorized access.
-6. Use Role Based Access (RBAC) to allow access to whomever needs it and block access from others
-7. Connect the different resources with each other correctly 
+5. Create an App Service Plan ✅
+6. Create an SQL Server and a database ✅ 
+7. Create a Key Vault
+8. Put each of the resources in the correct subnets I have set up earlier 
+9. Create Private Endpoints to ensure privacy and block unauthorized access
+10. Use Role Based Access (RBAC) to allow access to whomever needs it and block access from others
+11. Connect the website I have created using React with the Azure SQL database
 
 ### Resources that will be used
 - `Resource Group`: A container in Azure that holds related resources like virtual machines, databases, and networks, allowing us to manage them together.
