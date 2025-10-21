@@ -17,10 +17,10 @@
                     <mxGeometry x="300.6" y="-188.87" width="279.4" height="188.87" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-35" value="&lt;blockquote style=&quot;margin: 0 0 0 40px; border: none; padding: 0px;&quot;&gt;&lt;br&gt;&lt;/blockquote&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
-                    <mxGeometry x="-110" y="174.37000000000003" width="310" height="205.63" as="geometry"/>
+                    <mxGeometry x="-120" y="230.00000000000003" width="310" height="205.63" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-2" value="dev-app-service&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;App Service Pla&lt;/font&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;n&lt;/font&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/App_Service_Plans.svg;" parent="1" vertex="1">
-                    <mxGeometry x="-80" y="480" width="50" height="50" as="geometry"/>
+                    <mxGeometry x="-90" y="535.63" width="50" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-5" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="WnGC63VPYkQ0A40VaTRL-4" target="WnGC63VPYkQ0A40VaTRL-2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -29,7 +29,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-4" value="&lt;div&gt;simple-web-app&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;App Service&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/App_Services.svg;" parent="1" vertex="1">
-                    <mxGeometry x="-80" y="213.33" width="50" height="50" as="geometry"/>
+                    <mxGeometry x="-90" y="268.96000000000004" width="50" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="11" target="WnGC63VPYkQ0A40VaTRL-10" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
@@ -103,7 +103,7 @@
                     <mxGeometry x="421.6" y="632" width="38" height="38" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-36" value="webapp_subnet&lt;br&gt;(10.0.0.0/24)&lt;br&gt;&lt;font size=&quot;1&quot;&gt;Subnet&lt;/font&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/Subnet.svg;" parent="1" vertex="1">
-                    <mxGeometry x="130" y="186.67000000000002" width="33.4" height="20" as="geometry"/>
+                    <mxGeometry x="120" y="242.3" width="33.4" height="20" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;curved=1;" parent="1" source="WnGC63VPYkQ0A40VaTRL-38" target="WnGC63VPYkQ0A40VaTRL-10" edge="1">
                     <mxGeometry relative="1" as="geometry">
@@ -134,7 +134,7 @@
                     <mxGeometry x="230" y="623.07" width="55.85" height="55.85" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-48" value="simple-web-app(...).net&lt;div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Default Domain&lt;/font&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/app_services/App_Service_Domains.svg;" parent="1" vertex="1">
-                    <mxGeometry x="110" y="306.49" width="33.4" height="27.01" as="geometry"/>
+                    <mxGeometry x="100" y="362.12" width="33.4" height="27.01" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-51" value="postgres_subnet&lt;br&gt;(10.0.3.0/24)&lt;br&gt;&lt;font size=&quot;1&quot;&gt;Subnet&lt;/font&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/Subnet.svg;" parent="1" vertex="1">
                     <mxGeometry x="332.1" y="-173.24" width="33.4" height="20" as="geometry"/>
