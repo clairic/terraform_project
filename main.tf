@@ -91,6 +91,7 @@ resource "azurerm_storage_account" "storageacc" {
   }
 }
 
+
 #Creating an SQL server and a database inside the resource group and the sql_subnet subnet I created before
 resource "azurerm_mssql_server" "sqlserver" {
   name                         = "sqlserverkalliopitsiampa"
