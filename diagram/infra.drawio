@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="c442s6LptLY7ps0O6eYq">
-        <mxGraphModel dx="2906" dy="1938" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="3420" dy="2148" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -120,7 +120,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-43" value="simple-web-app-id&lt;br&gt;&lt;font size=&quot;1&quot;&gt;Managed Identity&lt;br&gt;&lt;br&gt;RBAC:&lt;br&gt;1. Key Vault Secrets User - Key Vault&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;2. Storage Blob Data Reader - Storage Account&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;3. DB Contributor - SQL Server&lt;/font&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/identity/Managed_Identities.svg;" parent="1" vertex="1">
-                    <mxGeometry x="-89" y="-46" width="68" height="66" as="geometry"/>
+                    <mxGeometry x="-98" y="-220" width="68" height="66" as="geometry"/>
                 </mxCell>
                 <mxCell id="WnGC63VPYkQ0A40VaTRL-44" value="&lt;h2 style=&quot;margin: 0px 16px 0px 0px; overflow: hidden; text-overflow: ellipsis; line-height: 28px; flex: 0 1 auto; color: rgb(36, 36, 36);&quot; aria-describedby=&quot;d94a17a2-b767-4b31-a5c8-409c018c01a2&quot; id=&quot;d94a17a2-b767-4b31-a5c8-409c018c01a1&quot; class=&quot;fxs-blade-title-titleText msportalfx-tooltip-overflow&quot;&gt;&lt;font style=&quot;font-weight: normal;&quot; face=&quot;Helvetica&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;privatelink.blob.core.windows.net&lt;/span&gt;&lt;br&gt;&lt;font size=&quot;1&quot;&gt;Private DNS Zone&lt;/font&gt;&lt;/font&gt;&lt;/h2&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/networking/DNS_Zones.svg;" parent="1" vertex="1">
                     <mxGeometry x="1390" y="485.86" width="57.41" height="57.41" as="geometry"/>
@@ -202,7 +202,7 @@
                         <mxPoint x="438.5" y="100.25" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="17" value="dev-sql&lt;br&gt;&lt;font size=&quot;1&quot;&gt;Managed Identity&lt;br&gt;&lt;br&gt;RBAC&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;DB Contributor - SQL Server&lt;/font&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/identity/Managed_Identities.svg;" vertex="1" parent="1">
+                <mxCell id="17" value="dev-sql&lt;br&gt;&lt;font size=&quot;1&quot;&gt;Managed Identity&lt;br&gt;RBAC&lt;br&gt;&lt;/font&gt;&lt;div&gt;&lt;font size=&quot;1&quot;&gt;DB Contributor - SQL Server&lt;/font&gt;&lt;/div&gt;" style="image;aspect=fixed;html=1;points=[];align=center;fontSize=12;image=img/lib/azure2/identity/Managed_Identities.svg;" vertex="1" parent="1">
                     <mxGeometry x="417.25" y="60" width="42.5" height="41.25" as="geometry"/>
                 </mxCell>
             </root>
