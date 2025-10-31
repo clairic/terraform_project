@@ -14,8 +14,9 @@ There is a demo diagram in the .drawio I have created. I will add a ton of stuff
 6. Create a Storage Account ✅
 7. Create a subnet for the private endpoints ✅
 8. Create a private endpoint for the storage account and connect the web app to it ✅
-9. Create a Key Vault for storing secrets 
-10. Create a private endpoint for the keyvault and add it to the private endpoints subnet
+9. Create a private DNS zone for the storage account
+10. Create a Key Vault for storing secrets 
+11. Create a private endpoint for the keyvault and add it to the private endpoints subnet
 
 ### Resources that will be used
 - `Resource Group`: A container in Azure that holds related resources like virtual machines, databases, and networks, allowing us to manage them together.

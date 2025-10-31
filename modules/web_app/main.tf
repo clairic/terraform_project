@@ -4,12 +4,12 @@ resource "azurerm_service_plan" "app_service_plan" {
     location            = var.location
     resource_group_name = var.resource_group_name
     os_type             = "Linux"
-    sku_name            = "B1"  # Changed from B1 to S1 for VNet integration support
+    sku_name            = "B1"  #cheapest SKU for testing
     
     tags = var.tags
 }
 
-#Creating the web app
+#Creating the static web app for testing
 resource "azurerm_linux_web_app" "webapp" {
   name                = "static-webapp-kalliopi"
   resource_group_name = var.resource_group_name
@@ -18,6 +18,10 @@ resource "azurerm_linux_web_app" "webapp" {
 
   site_config {
     always_on = false
+    
+    application_stack {
+      node_version = "16-lts"
+    }
   }
 
   # App settings for storage connection
@@ -25,12 +29,13 @@ resource "azurerm_linux_web_app" "webapp" {
     "STORAGE_ACCOUNT_NAME"       = var.storage_account_name
     "STORAGE_CONNECTION_STRING"  = var.storage_connection_string
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+    "WEBSITE_NODE_DEFAULT_VERSION" = "16.20.0"
   }
 
   tags = var.tags
 }
 
-# Create VNet integration for the web app (alternative method)
+# Creating VNet integration for the web app
 resource "azurerm_app_service_virtual_network_swift_connection" "webapp_vnet_integration" {
   app_service_id = azurerm_linux_web_app.webapp.id
   subnet_id      = var.subnet_id

@@ -8,6 +8,7 @@ resource "azurerm_virtual_network" "vnet" {
   tags = var.tags
 }
 
+#Creating the subnet for my web app
 resource "azurerm_subnet" "subnet"{
     name = "webapp_subnet"
     resource_group_name = var.resource_group_name
@@ -26,7 +27,7 @@ resource "azurerm_subnet" "subnet"{
     }
 }
 
-# Dedicated subnet for private endpoints
+# Created a dedicated subnet for private endpoints
 resource "azurerm_subnet" "private_endpoint_subnet" {
     name                 = "private_endpoint_subnet"
     resource_group_name  = var.resource_group_name

@@ -25,6 +25,12 @@ resource "azurerm_resource_group" "rg" {
   }
 }
 
+#Creating a private DNS zone for storage account
+resource "azurerm_private_dns_zone" "storage_dns_zone" {
+  name                = "privatelink.blob.core.windows.net"
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
 
 #Create a virtual network using the network module
 module "network" {
