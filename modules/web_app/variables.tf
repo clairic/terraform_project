@@ -29,3 +29,23 @@ variable "subnet_name" {
   description = "The name of the subnet to deploy the web app into"
   type        = string
 }
+
+variable "storage_account_name" {
+  description = "Name of the storage account to connect to"
+  type        = string
+  default     = ""
+}
+
+variable "storage_account_access_key" {
+  description = "Access key for the storage account"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
+variable "storage_connection_string" {
+  description = "Connection string for the storage account"
+  type        = string
+  default     = ""
+  sensitive   = true
+}

@@ -33,3 +33,13 @@ output "vnet_resource_group_name" {
   description = "The resource group name of the virtual network"
   value       = azurerm_virtual_network.vnet.resource_group_name
 }
+
+output "private_endpoint_subnet_id" {
+  description = "The ID of the private endpoint subnet"
+  value       = azurerm_subnet.private_endpoint_subnet.id
+}
+
+output "private_endpoint_subnet_name" {
+  description = "The name of the private endpoint subnet"
+  value       = azurerm_subnet.private_endpoint_subnet.name
+}

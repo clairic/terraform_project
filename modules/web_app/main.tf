@@ -20,6 +20,13 @@ resource "azurerm_linux_web_app" "webapp" {
     always_on = false
   }
 
+  # App settings for storage connection
+  app_settings = {
+    "STORAGE_ACCOUNT_NAME"       = var.storage_account_name
+    "STORAGE_CONNECTION_STRING"  = var.storage_connection_string
+    "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+  }
+
   tags = var.tags
 }
 
