@@ -6,7 +6,7 @@ This project demonstrates enterprise-grade Infrastructure as Code (IaC) using Te
 
 > **📋 View Diagram**: 
 
-![Infrastructure Diagram](./diagram/infra.png)
+![Infrastructure Diagram](./diagram/infra_img.png)
 
 The infrastructure includes:
 - **Private networking** with VNet integration
