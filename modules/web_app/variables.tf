@@ -14,6 +14,18 @@ variable "app_service_plan_name" {
   default     = "app_service_plan"
 }
 
+variable "app_service_sku" {
+  description = "SKU for the App Service Plan (F1=Free, B1=Basic)"
+  type        = string
+  default     = "B1"
+}
+
+variable "enable_vnet_integration" {
+  description = "Enable VNet integration (not supported on F1 tier)"
+  type        = bool
+  default     = true
+}
+
 variable "tags" {
   description = "Tags to apply to the web app"
   type        = map(string)
