@@ -1,33 +1,200 @@
-# Azure Web App deployment using Terraform
-In this demo project I will be using Terraform (IaC) to deploy a web app I have created on Microsoft Azure. 
+# 🚀 Azure Web App Infrastructure with Terraform
 
-### Project Diagram
-There is a demo diagram in the .drawio I have created. I will add a ton of stuff so it will certainly change a lot. 
+This project demonstrates enterprise-grade Infrastructure as Code (IaC) using Terraform to deploy a complete web application infrastructure on Microsoft Azure with private networking, security, and best practices.
 
+## 🏗️ Architecture Overview
 
-### To-do tasks 
-1. Create a resource group with the name "rg-kalliopi-tsiampa" on Azure ✅
-2. Create a Virtual Network (Vnet) ✅
-3. Create an App Service Plan ✅
-4. Create a web app (static for the time being)✅
-5. Create a subnet for the web app and integrate the web app with it ✅
-6. Create a Storage Account ✅
-7. Create a subnet for the private endpoints ✅
-8. Create a private endpoint for the storage account and connect the web app to it ✅
-9. Create a private DNS zone for the storage account
-10. Create a Key Vault for storing secrets 
-11. Create a private endpoint for the keyvault and add it to the private endpoints subnet
+![Infrastructure Diagram](./diagram/infra.drawio)
 
-### Resources that will be used
-- `Resource Group`: A container in Azure that holds related resources like virtual machines, databases, and networks, allowing us to manage them together.
-- `Virtual Network`: A private network that lets Azure resources securely communicate with each other, the internet, and on-premises networks.
-- `Private Endpoints`: A network interface that connects you privately to an Azure service over your Virtual Network, using a private IP address instead of a public one.
-- `Storage Account`: A service that provides scalable cloud storage for data like blobs, files, queues, and tables.
-- `Azure App Service Plan`: In Azure, an App Service Plan defines the region, pricing tier, and compute resources used to run web apps, APIs, and functions.
-- `Azure App Service`: A platform for building, hosting, and scaling web apps, REST APIs, and mobile backends without managing infrastructure.
-- `Azure SQL Database`: A fully managed database service that runs SQL Server in the cloud, offering high availability, scalability, and security.
-- `Azure SQL Server`:  A logical container in Azure that manages SQL databases, authentication, and firewall rules for access control.
-- `KeyVault`: A service that securely stores and manages secrets like passwords, keys, and certificates.
+The infrastructure includes:
+- **Private networking** with VNet integration
+- **Security** through private endpoints and Key Vault
+- **Scalability** with App Service and SQL Database
+- **Storage** with private endpoint configuration
+- **Secrets management** with Azure Key Vault
+
+## 📋 Project Status
+
+### ✅ Completed Features
+- [x] Resource Group (`rg-kalliopi-tsiampa`)
+- [x] Virtual Network with custom subnets
+- [x] App Service Plan (B1 SKU)
+- [x] Linux Web App with Node.js runtime
+- [x] VNet integration for web app
+- [x] Storage Account with private endpoint
+- [x] Private endpoints subnet
+- [x] Private DNS zones for name resolution
+- [x] **Azure Key Vault with private endpoint**
+- [x] **SQL Server and Database with private endpoint**
+- [x] **Complete private networking setup**
+
+### 🎯 Key Features Implemented
+- **🔒 Private Endpoints**: All services isolated from internet
+- **🌐 VNet Integration**: Secure communication between services
+- **🔐 Azure Key Vault**: Centralized secrets management
+- **🗄️ SQL Database**: Managed database with private access
+- **📦 Storage Account**: Blob storage with private endpoint
+- **🛡️ Network Security**: Default deny with controlled access
+
+## 🏛️ Infrastructure Components
+
+| Component | Description | SKU/Tier | Security |
+|-----------|-------------|----------|----------|
+| **Resource Group** | Container for all resources | Standard | ✅ |
+| **Virtual Network** | Private network (10.0.0.0/16) | Standard | ✅ Private |
+| **App Service Plan** | Compute for web applications | B1 (Basic) | ✅ VNet Integrated |
+| **Linux Web App** | Node.js 16 web application | B1 | ✅ Private Access |
+| **Storage Account** | Blob storage for app data | Standard_LRS | ✅ Private Endpoint |
+| **SQL Server** | Managed database server | Basic | ✅ Private Endpoint |
+| **SQL Database** | Application database (2GB) | Basic | ✅ Private Access |
+| **Key Vault** | Secrets and configuration | Standard | ✅ Private Endpoint |
+
+## 🌐 Network Architecture
+
+### Subnets
+- **Web App Subnet**: `10.0.1.0/24` - VNet integration
+- **Private Endpoints Subnet**: `10.0.2.0/24` - All private endpoints
+
+### Private Endpoints
+- **Storage Account**: `privatelink.blob.core.windows.net`
+- **Key Vault**: `privatelink.vaultcore.azure.net`
+- **SQL Server**: `privatelink.database.windows.net`
+
+### DNS Resolution
+- Private DNS zones automatically resolve service names to private IPs
+- All traffic stays within the virtual network
+
+## 🔐 Security Features
+
+### Network Security
+- ✅ **No public internet access** to databases and storage
+- ✅ **Private endpoints** for all data services
+- ✅ **VNet integration** for web app
+- ✅ **Network ACLs** with IP restrictions
+
+### Secrets Management
+- ✅ **Azure Key Vault** stores all connection strings
+- ✅ **Auto-generated passwords** for SQL Server
+- ✅ **Encrypted storage** of sensitive data
+- ✅ **Access policies** with least privilege
+
+### Authentication
+- ✅ **Managed identities** ready for implementation
+- ✅ **Azure AD integration** prepared
+- ✅ **Service principal** access controls
+
+## 💰 Cost Optimization
+
+| Service | SKU | Monthly Cost (Est.) | Notes |
+|---------|-----|-------------------|-------|
+| App Service Plan | B1 | ~$13.14 | Supports VNet integration |
+| SQL Database | Basic | ~$4.90 | Perfect for development |
+| Storage Account | Standard_LRS | ~$0.024/GB | Local redundancy |
+| Key Vault | Standard | ~$0.03/10k ops | Pay per operation |
+| **Total** | | **~$18-20/month** | Development workload |
+
+## 🚀 Getting Started
+
+### Prerequisites
+- [Terraform](https://terraform.io) >= 1.1.0
+- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+- Azure subscription with sufficient permissions
+
+### Installation & Deployment
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/clairic/terraform_project.git
+   cd terraform_project
+   ```
+
+2. **Login to Azure**
+   ```bash
+   az login
+   az account set --subscription "your-subscription-id"
+   ```
+
+3. **Initialize Terraform**
+   ```bash
+   terraform init
+   ```
+
+4. **Review the plan**
+   ```bash
+   terraform plan
+   ```
+
+5. **Deploy infrastructure**
+   ```bash
+   terraform apply
+   ```
+
+6. **Deploy the web application**
+   ```bash
+   cd webapp
+   npm install
+   # Deploy using Azure CLI or GitHub Actions
+   ```
+
+## 📁 Project Structure
+
+```
+terraform_project/
+├── 📄 main.tf                    # Main Terraform configuration
+├── 📄 README.md                 # This file
+├── 📄 terraform.tfstate         # Terraform state (auto-generated)
+├── 📁 diagram/
+│   └── 📄 infra.drawio          # Infrastructure diagram
+├── 📁 modules/
+│   ├── 📁 keyvault/             # Key Vault module
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   ├── 📁 network/              # Virtual Network module
+│   ├── 📁 sql/                  # SQL Server & Database module
+│   ├── 📁 storage/              # Storage Account module
+│   └── 📁 web_app/              # App Service module
+└── 📁 webapp/                   # Node.js web application
+    ├── 📄 app.js                # Express server
+    ├── 📄 package.json          # Dependencies
+    └── 📁 public/               # Static files
+        ├── index.html
+        ├── style.css
+        └── script.js
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+Key configuration is managed through Terraform variables and Azure Key Vault:
+
+- **SQL Connection String**: Stored in Key Vault
+- **Storage Connection String**: Stored in Key Vault
+- **Application Secrets**: Stored in Key Vault
+
+### Terraform Variables
+Key variables in `main.tf`:
+- `location`: Azure region (default: North Europe)
+- `resource_group_name`: Container for resources
+- `app_service_sku`: App Service tier (B1/F1)
+- `enable_private_endpoint`: Enable private networking
+
+## 🛠️ Technologies Used
+
+- **Infrastructure**: Terraform, Azure Resource Manager
+- **Compute**: Azure App Service (Linux)
+- **Database**: Azure SQL Database
+- **Storage**: Azure Blob Storage
+- **Security**: Azure Key Vault, Private Endpoints
+- **Networking**: Azure Virtual Network, Private DNS
+- **Application**: Node.js, Express.js, HTML/CSS/JavaScript
+
+## 📚 Learn More
+
+- [Azure App Service Documentation](https://docs.microsoft.com/en-us/azure/app-service/)
+- [Terraform Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
+- [Azure Private Endpoints](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
+- [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/)
  
 
 
