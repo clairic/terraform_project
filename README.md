@@ -4,9 +4,8 @@ This project demonstrates enterprise-grade Infrastructure as Code (IaC) using Te
 
 ## 🏗️ Architecture Overview
 
-> **📋 View Diagram**: Open [`./diagram/infra.drawio`](./diagram/infra.drawio) in [draw.io](https://app.diagrams.net/) or VS Code with the Draw.io extension to view the infrastructure diagram.
-> 
-> *Note: To display the diagram here, export it as PNG/SVG from draw.io and replace this note with: `![Infrastructure Diagram](./diagram/infra.png)`*
+> **📋 View Diagram**: 
+`![Infrastructure Diagram](./diagram/infra.png)`
 
 The infrastructure includes:
 - **Private networking** with VNet integration
