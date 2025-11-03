@@ -5,7 +5,8 @@ This project demonstrates enterprise-grade Infrastructure as Code (IaC) using Te
 ## 🏗️ Architecture Overview
 
 > **📋 View Diagram**: 
-`![Infrastructure Diagram](./diagram/infra.png)`
+
+![Infrastructure Diagram](./diagram/infra.png)
 
 The infrastructure includes:
 - **Private networking** with VNet integration
@@ -137,32 +138,6 @@ The infrastructure includes:
    # Deploy using Azure CLI or GitHub Actions
    ```
 
-## 📁 Project Structure
-
-```
-terraform_project/
-├── 📄 main.tf                    # Main Terraform configuration
-├── 📄 README.md                 # This file
-├── 📄 terraform.tfstate         # Terraform state (auto-generated)
-├── 📁 diagram/
-│   └── 📄 infra.drawio          # Infrastructure diagram
-├── 📁 modules/
-│   ├── 📁 keyvault/             # Key Vault module
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   └── outputs.tf
-│   ├── 📁 network/              # Virtual Network module
-│   ├── 📁 sql/                  # SQL Server & Database module
-│   ├── 📁 storage/              # Storage Account module
-│   └── 📁 web_app/              # App Service module
-└── 📁 webapp/                   # Node.js web application
-    ├── 📄 app.js                # Express server
-    ├── 📄 package.json          # Dependencies
-    └── 📁 public/               # Static files
-        ├── index.html
-        ├── style.css
-        └── script.js
-```
 
 ## 🔧 Configuration
 
