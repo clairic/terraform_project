@@ -1,6 +1,6 @@
 # 🚀 Azure Web App Infrastructure with Terraform
 
-This project demonstrates enterprise-grade Infrastructure as Code (IaC) using Terraform to deploy a complete web application infrastructure on Microsoft Azure with private networking, security, and best practices.
+In this project I worked on deploying a dynamic web app on Azure. I created the infrastructure using Terraform (IaC). 
 
 ## 🏗️ Architecture Overview
 
@@ -55,7 +55,7 @@ The infrastructure includes:
 
 ### Subnets
 - **Web App Subnet**: `10.0.1.0/24` - VNet integration
-- **Private Endpoints Subnet**: `10.0.2.0/24` - All private endpoints
+- **Private Endpoints Subnet**: `10.0.2.0/24` - All the private endpoints are placed here
 
 ### Private Endpoints
 - **Storage Account**: `privatelink.blob.core.windows.net`
@@ -65,81 +65,6 @@ The infrastructure includes:
 ### DNS Resolution
 - Private DNS zones automatically resolve service names to private IPs
 - All traffic stays within the virtual network
-
-## 🔐 Security Features
-
-### Network Security
-- ✅ **No public internet access** to databases and storage
-- ✅ **Private endpoints** for all data services
-- ✅ **VNet integration** for web app
-- ✅ **Network ACLs** with IP restrictions
-
-### Secrets Management
-- ✅ **Azure Key Vault** stores all connection strings
-- ✅ **Auto-generated passwords** for SQL Server
-- ✅ **Encrypted storage** of sensitive data
-- ✅ **Access policies** with least privilege
-
-### Authentication
-- ✅ **Managed identities** ready for implementation
-- ✅ **Azure AD integration** prepared
-- ✅ **Service principal** access controls
-
-## 💰 Cost Optimization
-
-| Service | SKU | Monthly Cost (Est.) | Notes |
-|---------|-----|-------------------|-------|
-| App Service Plan | B1 | ~$13.14 | Supports VNet integration |
-| SQL Database | Basic | ~$4.90 | Perfect for development |
-| Storage Account | Standard_LRS | ~$0.024/GB | Local redundancy |
-| Key Vault | Standard | ~$0.03/10k ops | Pay per operation |
-| **Total** | | **~$18-20/month** | Development workload |
-
-## 🚀 Getting Started
-
-### Prerequisites
-- [Terraform](https://terraform.io) >= 1.1.0
-- [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
-- Azure subscription with sufficient permissions
-
-### Installation & Deployment
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/clairic/terraform_project.git
-   cd terraform_project
-   ```
-
-2. **Login to Azure**
-   ```bash
-   az login
-   az account set --subscription "your-subscription-id"
-   ```
-
-3. **Initialize Terraform**
-   ```bash
-   terraform init
-   ```
-
-4. **Review the plan**
-   ```bash
-   terraform plan
-   ```
-
-5. **Deploy infrastructure**
-   ```bash
-   terraform apply
-   ```
-
-6. **Deploy the web application**
-   ```bash
-   cd webapp
-   npm install
-   # Deploy using Azure CLI or GitHub Actions
-   ```
-
-
-## 🔧 Configuration
 
 ### Environment Variables
 Key configuration is managed through Terraform variables and Azure Key Vault:
@@ -154,24 +79,6 @@ Key variables in `main.tf`:
 - `resource_group_name`: Container for resources
 - `app_service_sku`: App Service tier (B1/F1)
 - `enable_private_endpoint`: Enable private networking
-
-## 🛠️ Technologies Used
-
-- **Infrastructure**: Terraform, Azure Resource Manager
-- **Compute**: Azure App Service (Linux)
-- **Database**: Azure SQL Database
-- **Storage**: Azure Blob Storage
-- **Security**: Azure Key Vault, Private Endpoints
-- **Networking**: Azure Virtual Network, Private DNS
-- **Application**: Node.js, Express.js, HTML/CSS/JavaScript
-
-## 📚 Learn More
-
-- [Azure App Service Documentation](https://docs.microsoft.com/en-us/azure/app-service/)
-- [Terraform Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
-- [Azure Private Endpoints](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
-- [Azure Key Vault](https://docs.microsoft.com/en-us/azure/key-vault/)
- 
 
 
 
