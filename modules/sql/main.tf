@@ -1,10 +1,15 @@
-# Generate random password for SQL Server
+# Get current user/client configuration for Azure AD admin
+data "azurerm_client_config" "current" {}
+
+# Generate random password for SQL Server (avoid problematic special characters)
 resource "random_password" "sql_admin_password" {
   length  = 16
   special = true
   upper   = true
   lower   = true
   numeric = true
+  # Exclude problematic characters that can break connection strings
+  override_special = "!@#%^&*()-_=+[{}]|;:,.<>?"
 }
 
 # Create SQL Server
@@ -16,14 +21,14 @@ resource "azurerm_mssql_server" "main" {
   administrator_login          = var.sql_admin_username
   administrator_login_password = random_password.sql_admin_password.result
   
-  # Disable public network access when using private endpoint
-  public_network_access_enabled = !var.enable_private_endpoint
+  # Enable public network access for troubleshooting (can be disabled later)
+  public_network_access_enabled = true
   
-  # Enable Azure AD authentication
+  # Enable Azure AD authentication (only if valid object ID is provided)
   dynamic "azuread_administrator" {
-    for_each = var.azuread_admin_object_id != "" ? [1] : []
+    for_each = var.enable_azuread_admin && var.azuread_admin_object_id != "" ? [1] : []
     content {
-      login_username = var.azuread_admin_login
+      login_username = var.azuread_admin_login != "" ? var.azuread_admin_login : "aad-sqladmin"
       object_id      = var.azuread_admin_object_id
     }
   }
@@ -49,9 +54,8 @@ resource "azurerm_mssql_database" "main" {
   tags = var.tags
 }
 
-# Firewall rule to allow Azure services (only if public access is enabled)
+# Firewall rule to allow Azure services (temporarily enabled for troubleshooting)
 resource "azurerm_mssql_firewall_rule" "azure_services" {
-  count            = var.enable_private_endpoint ? 0 : 1
   name             = "AllowAzureServices"
   server_id        = azurerm_mssql_server.main.id
   start_ip_address = "0.0.0.0"
@@ -123,4 +127,11 @@ resource "azurerm_mssql_virtual_network_rule" "main" {
   name      = "${var.sql_server_name}-vnet-rule"
   server_id = azurerm_mssql_server.main.id
   subnet_id = var.subnet_id
+}
+
+# RBAC role assignment for web app managed identity to access SQL Database
+resource "azurerm_role_assignment" "webapp_sql_contributor" {
+  scope                = azurerm_mssql_database.main.id  
+  role_definition_name = "SQL DB Contributor"
+  principal_id         = var.webapp_principal_id
 }

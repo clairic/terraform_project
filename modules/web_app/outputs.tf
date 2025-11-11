@@ -48,3 +48,14 @@ output "webapp_url" {
   value       = "https://${azurerm_linux_web_app.webapp.default_hostname}"
 }
 
+# Managed Identity outputs for RBAC assignments
+output "webapp_identity_principal_id" {
+  description = "The principal ID of the system-assigned managed identity"
+  value       = azurerm_linux_web_app.webapp.identity[0].principal_id
+}
+
+output "webapp_identity_tenant_id" {
+  description = "The tenant ID of the system-assigned managed identity"  
+  value       = azurerm_linux_web_app.webapp.identity[0].tenant_id
+}
+

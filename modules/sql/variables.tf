@@ -93,3 +93,15 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "webapp_principal_id" {
+  description = "Principal ID of the web app managed identity for SQL access"
+  type        = string
+  default     = ""
+}
+
+variable "enable_azuread_admin" {
+  description = "Enable Azure AD administrator for SQL Server"
+  type        = bool
+  default     = true
+}

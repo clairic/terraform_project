@@ -34,3 +34,9 @@ variable "private_endpoint_subnet_id" {
   description = "The subnet ID for the private endpoint"
   type        = string
 }
+
+variable "webapp_principal_id" {
+  description = "Principal ID of the web app managed identity for RBAC assignment"
+  type        = string
+  default     = ""
+}

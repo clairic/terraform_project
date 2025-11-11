@@ -31,3 +31,10 @@ resource "azurerm_private_endpoint" "storage_private_endpoint" {
 
   tags = var.tags
 }
+
+# RBAC role assignment for web app managed identity to access storage
+resource "azurerm_role_assignment" "webapp_storage_reader" {
+  scope                = azurerm_storage_account.storage_account.id
+  role_definition_name = "Storage Blob Data Reader"
+  principal_id         = var.webapp_principal_id
+}

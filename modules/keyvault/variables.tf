@@ -34,6 +34,13 @@ variable "api_key" {
   sensitive   = true
 }
 
+variable "sql_connection_string" {
+  description = "SQL database connection string to store as secret"
+  type        = string
+  default     = ""
+  sensitive   = true
+}
+
 variable "tags" {
   description = "Tags to apply to Key Vault"
   type        = map(string)
@@ -74,4 +81,10 @@ variable "allowed_ip_addresses" {
   description = "List of IP addresses allowed to access Key Vault (for deployment/management)"
   type        = list(string)
   default     = []
+}
+
+variable "webapp_principal_id" {
+  description = "Principal ID of the web app managed identity for RBAC assignment"
+  type        = string
+  default     = ""
 }

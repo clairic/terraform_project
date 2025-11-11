@@ -39,6 +39,22 @@ output "sql_connection_string_secret_id" {
   value       = azurerm_key_vault_secret.sql_connection_string.id
 }
 
+# Secret URIs for Key Vault references in App Service
+output "storage_connection_string_secret_uri" {
+  description = "Key Vault secret URI for storage connection string"
+  value       = azurerm_key_vault_secret.storage_connection_string.versionless_id
+}
+
+output "webapp_secret_key_secret_uri" {
+  description = "Key Vault secret URI for webapp secret key"
+  value       = azurerm_key_vault_secret.webapp_secret_key.versionless_id
+}
+
+output "sql_connection_string_secret_uri" {
+  description = "Key Vault secret URI for SQL connection string"
+  value       = azurerm_key_vault_secret.sql_connection_string.versionless_id
+}
+
 # Private endpoint outputs
 output "private_endpoint_id" {
   description = "ID of the Key Vault private endpoint"

@@ -52,6 +52,7 @@ module "web_app" {
   
   resource_group_name         = azurerm_resource_group.rg.name
   location                   = azurerm_resource_group.rg.location
+  web_app_name               = "kalliopi-web-app"
   app_service_plan_name      = "app-service-plan-kalliopi"
   app_service_sku            = "B1"  # Use B1 for VNet integration, F1 for cheapest
   enable_vnet_integration    = true  # Set to false if using F1 SKU
@@ -62,6 +63,12 @@ module "web_app" {
   storage_account_name       = module.storage.storage_account_name
   storage_connection_string  = module.storage.storage_account_primary_connection_string
   storage_account_access_key = module.storage.storage_account_primary_access_key
+  
+  # Key Vault references for secure secret access
+  keyvault_name               = module.keyvault.key_vault_name
+  keyvault_storage_secret_uri = module.keyvault.storage_connection_string_secret_uri
+  keyvault_sql_secret_uri     = module.keyvault.sql_connection_string_secret_uri
+  keyvault_webapp_secret_uri  = module.keyvault.webapp_secret_key_secret_uri
   
   tags = {
     Environment = "Terraform Getting Started"
@@ -78,6 +85,9 @@ module "storage" {
   virtual_network_id           = module.network.vnet_id
   virtual_network_name         = module.network.vnet_name
   private_endpoint_subnet_id   = module.network.private_endpoint_subnet_id
+  
+  # RBAC configuration
+  webapp_principal_id          = module.web_app.webapp_identity_principal_id
   
   tags = {
     Environment = "Terraform Getting Started"
@@ -101,13 +111,16 @@ module "keyvault" {
   key_vault_name             = "kv-kalliopi-${random_string.suffix.result}"
   storage_connection_string  = module.storage.storage_account_primary_connection_string
   webapp_secret_key          = "my-super-secret-webapp-key-${random_string.suffix.result}"
-  api_key                    = module.sql.connection_string  # Store SQL connection string
+  sql_connection_string      = module.sql.connection_string  # Store SQL connection string
+  
+  # RBAC configuration
+  webapp_principal_id         = module.web_app.webapp_identity_principal_id
   
   # Manual object ID to fix access policy issue
   manual_object_id            = "3f8e8156-22ed-4dc8-a23e-ca8355d2bb77"
   
   # Allow your IP for Terraform deployment (from error message)
-  allowed_ip_addresses        = ["79.129.238.27"]
+  allowed_ip_addresses        = ["79.129.238.27", "2.86.114.255"]
   
   # Private endpoint configuration
   enable_private_endpoint     = true
@@ -133,6 +146,12 @@ module "sql" {
   database_sku               = "Basic"
   database_max_size_gb       = 2
   
+  # Azure AD configuration
+  enable_azuread_admin       = true
+  azuread_admin_object_id    = "3f8e8156-22ed-4dc8-a23e-ca8355d2bb77"  # Use same as Key Vault
+  azuread_admin_login        = "aad-sqladmin"  # Different from SQL admin username
+  webapp_principal_id        = module.web_app.webapp_identity_principal_id
+  
   # Private endpoint configuration
   enable_private_endpoint     = true
   private_endpoint_subnet_id  = module.network.private_endpoint_subnet_id
@@ -140,7 +159,7 @@ module "sql" {
   
   # Optional: Development access (disable for production)
   enable_dev_access          = false
-  dev_ip_address             = "0.0.0.0"  # Replace with your actual IP if needed
+  dev_ip_address             = "0.0.0.0"  # No external access allowed
   enable_vnet_rule           = false      # Not needed with private endpoint
   subnet_id                  = module.network.subnet_id
   
@@ -150,5 +169,33 @@ module "sql" {
   }
 }
 
+# Outputs for deployment information
+output "app_service_name" {
+  description = "Name of the App Service"
+  value       = module.web_app.webapp_name
+}
 
+output "app_service_url" {
+  description = "URL of the deployed App Service"
+  value       = module.web_app.webapp_url
+}
 
+output "resource_group_name" {
+  description = "Name of the resource group"
+  value       = azurerm_resource_group.rg.name
+}
+
+output "key_vault_name" {
+  description = "Name of the Key Vault"
+  value       = module.keyvault.key_vault_name
+}
+
+output "sql_server_name" {
+  description = "Name of the SQL Server"
+  value       = module.sql.sql_server_name
+}
+
+output "storage_account_name" {
+  description = "Name of the Storage Account"
+  value       = module.storage.storage_account_name
+}

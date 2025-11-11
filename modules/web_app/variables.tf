@@ -8,6 +8,12 @@ variable "location" {
   type        = string
 } 
 
+variable "web_app_name" {
+  description = "Name of the web app"
+  type        = string
+  default     = "kalliopi-web-app"
+}
+
 variable "app_service_plan_name" {
   description = "Name of the App Service Plan"
   type        = string
@@ -60,4 +66,29 @@ variable "storage_connection_string" {
   type        = string
   default     = ""
   sensitive   = true
+}
+
+# Key Vault secret URIs for secure access
+variable "keyvault_storage_secret_uri" {
+  description = "Key Vault secret URI for storage connection string"
+  type        = string
+  default     = ""
+}
+
+variable "keyvault_sql_secret_uri" {
+  description = "Key Vault secret URI for SQL connection string"
+  type        = string
+  default     = ""
+}
+
+variable "keyvault_webapp_secret_uri" {
+  description = "Key Vault secret URI for web app secret key"
+  type        = string
+  default     = ""
+}
+
+variable "keyvault_name" {
+  description = "Name of the Key Vault for URL configuration"
+  type        = string
+  default     = ""
 }

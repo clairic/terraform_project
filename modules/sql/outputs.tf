@@ -36,6 +36,13 @@ output "database_name" {
 
 output "connection_string" {
   description = "SQL Database connection string"
+  value       = "Server=${azurerm_mssql_server.main.fully_qualified_domain_name};Database=${azurerm_mssql_database.main.name};User ID=${azurerm_mssql_server.main.administrator_login};Password=${random_password.sql_admin_password.result};Encrypt=true;TrustServerCertificate=false;Connection Timeout=60;ConnectRetryCount=3;ConnectRetryInterval=10;"
+  sensitive   = true
+}
+
+# Alternative connection string with SQL authentication (fallback)
+output "connection_string_sql_auth" {
+  description = "SQL Database connection string with SQL authentication"
   value       = "Server=${azurerm_mssql_server.main.fully_qualified_domain_name};Database=${azurerm_mssql_database.main.name};User Id=${azurerm_mssql_server.main.administrator_login};Password=${random_password.sql_admin_password.result};Encrypt=true;TrustServerCertificate=false;Connection Timeout=30;"
   sensitive   = true
 }

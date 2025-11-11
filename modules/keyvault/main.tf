@@ -12,6 +12,9 @@ resource "azurerm_key_vault" "main" {
   purge_protection_enabled    = false
   sku_name                    = "standard"
 
+  # Keep using access policies for now (RBAC requires higher permissions)
+  # enable_rbac_authorization   = true
+
   # Network access rules - Allow your IP for deployment, then restrict to private endpoint
   network_acls {
     bypass                     = "AzureServices"
@@ -24,7 +27,7 @@ resource "azurerm_key_vault" "main" {
     virtual_network_subnet_ids = var.enable_private_endpoint ? [] : (var.subnet_id != "" ? [var.subnet_id] : [])
   }
 
-  # Only create access policy if object_id is valid
+  # Access policy for current user/service principal
   dynamic "access_policy" {
     for_each = data.azurerm_client_config.current.object_id != null && data.azurerm_client_config.current.object_id != "" ? [1] : []
     
@@ -33,35 +36,15 @@ resource "azurerm_key_vault" "main" {
       object_id = data.azurerm_client_config.current.object_id
 
       key_permissions = [
-        "Get",
-        "List",
-        "Update",
-        "Create",
-        "Import",
-        "Delete",
-        "Recover",
-        "Backup",
-        "Restore",
+        "Get", "List", "Update", "Create", "Import", "Delete", "Recover", "Backup", "Restore"
       ]
 
       secret_permissions = [
-        "Get",
-        "List",
-        "Set",
-        "Delete",
-        "Recover",
-        "Backup",
-        "Restore",
+        "Get", "List", "Set", "Delete", "Recover", "Backup", "Restore"
       ]
 
       storage_permissions = [
-        "Get",
-        "List",
-        "Update",
-        "Delete",
-        "Recover",
-        "Backup",
-        "Restore",
+        "Get", "List", "Update", "Delete", "Recover", "Backup", "Restore"
       ]
     }
   }
@@ -69,7 +52,9 @@ resource "azurerm_key_vault" "main" {
   tags = var.tags
 }
 
-# Separate access policy for manual object ID specification (if needed)
+# Access policies for Key Vault access (fallback from RBAC due to permissions)
+
+# Manual access policy for your user account
 resource "azurerm_key_vault_access_policy" "manual_access_policy" {
   count        = var.manual_object_id != "" ? 1 : 0
   key_vault_id = azurerm_key_vault.main.id
@@ -77,35 +62,26 @@ resource "azurerm_key_vault_access_policy" "manual_access_policy" {
   object_id    = var.manual_object_id
 
   key_permissions = [
-    "Get",
-    "List",
-    "Update",
-    "Create",
-    "Import",
-    "Delete",
-    "Recover",
-    "Backup",
-    "Restore",
+    "Get", "List", "Update", "Create", "Import", "Delete", "Recover", "Backup", "Restore"
   ]
 
   secret_permissions = [
-    "Get",
-    "List",
-    "Set",
-    "Delete",
-    "Recover",
-    "Backup",
-    "Restore",
+    "Get", "List", "Set", "Delete", "Recover", "Backup", "Restore"
   ]
 
   storage_permissions = [
-    "Get",
-    "List",
-    "Update",
-    "Delete",
-    "Recover",
-    "Backup",
-    "Restore",
+    "Get", "List", "Update", "Delete", "Recover", "Backup", "Restore"
+  ]
+}
+
+# Access policy for web app managed identity
+resource "azurerm_key_vault_access_policy" "webapp_access_policy" {
+  key_vault_id = azurerm_key_vault.main.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = var.webapp_principal_id
+
+  secret_permissions = [
+    "Get", "List"
   ]
 }
 
@@ -115,7 +91,7 @@ resource "azurerm_key_vault_secret" "storage_connection_string" {
   value        = var.storage_connection_string != "" ? var.storage_connection_string : "placeholder-storage-connection-string"
   key_vault_id = azurerm_key_vault.main.id
 
-  depends_on = [azurerm_key_vault.main]
+  depends_on = [azurerm_key_vault_access_policy.manual_access_policy]
 }
 
 resource "azurerm_key_vault_secret" "webapp_secret_key" {
@@ -123,7 +99,7 @@ resource "azurerm_key_vault_secret" "webapp_secret_key" {
   value        = var.webapp_secret_key
   key_vault_id = azurerm_key_vault.main.id
 
-  depends_on = [azurerm_key_vault.main]
+  depends_on = [azurerm_key_vault_access_policy.manual_access_policy]
 }
 
 resource "azurerm_key_vault_secret" "api_key" {
@@ -131,16 +107,16 @@ resource "azurerm_key_vault_secret" "api_key" {
   value        = var.api_key != "" ? var.api_key : "placeholder-api-key"
   key_vault_id = azurerm_key_vault.main.id
 
-  depends_on = [azurerm_key_vault.main]
+  depends_on = [azurerm_key_vault_access_policy.manual_access_policy]
 }
 
-# SQL connection string secret (stored in api_key for now, or add a dedicated variable)
+# SQL connection string secret
 resource "azurerm_key_vault_secret" "sql_connection_string" {
   name         = "sql-connection-string"
-  value        = var.api_key != "" ? var.api_key : "placeholder-sql-connection-string"
+  value        = var.sql_connection_string != "" ? var.sql_connection_string : "placeholder-sql-connection-string"
   key_vault_id = azurerm_key_vault.main.id
 
-  depends_on = [azurerm_key_vault.main]
+  depends_on = [azurerm_key_vault_access_policy.manual_access_policy]
 }
 
 # Private endpoint for Key Vault

@@ -9,13 +9,18 @@ resource "azurerm_service_plan" "app_service_plan" {
     tags = var.tags
 }
 
-#Creating the static web app for testing
+#Creating the web app for testing
 resource "azurerm_linux_web_app" "webapp" {
-  name                = "webapp-kalliopi"
+  name                = var.web_app_name
   resource_group_name = var.resource_group_name
   location            = var.location
   service_plan_id     = azurerm_service_plan.app_service_plan.id
 
+  # Enable system-assigned managed identity for RBAC
+  identity {
+    type = "SystemAssigned"
+  }
+ 
   site_config {
     always_on = false
     
@@ -24,12 +29,25 @@ resource "azurerm_linux_web_app" "webapp" {
     }
   }
 
-  # App settings for storage connection
+  # App settings using Key Vault references (secure access via managed identity)
   app_settings = {
+    # Azure Key Vault URL for the app to access secrets
+    "KEY_VAULT_URL"              = "https://${var.keyvault_name}.vault.azure.net/"
     "STORAGE_ACCOUNT_NAME"       = var.storage_account_name
-    "STORAGE_CONNECTION_STRING"  = var.storage_connection_string
+    # Use Key Vault references with VaultName format (more reliable than SecretUri)
+    "STORAGE_CONNECTION_STRING"  = var.keyvault_name != "" ? "@Microsoft.KeyVault(VaultName=${var.keyvault_name};SecretName=storage-connection-string)" : var.storage_connection_string
+    "SQL_CONNECTION_STRING"      = var.keyvault_name != "" ? "@Microsoft.KeyVault(VaultName=${var.keyvault_name};SecretName=sql-connection-string)" : ""
+    "WEBAPP_SECRET_KEY"          = var.keyvault_name != "" ? "@Microsoft.KeyVault(VaultName=${var.keyvault_name};SecretName=webapp-secret-key)" : ""
     "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
     "WEBSITE_NODE_DEFAULT_VERSION" = "16.20.0"
+    # Enable managed identity authentication
+    "AZURE_CLIENT_ID"            = "system"
+    # Node.js production optimizations
+    "NODE_ENV"                   = "production"
+    "NPM_CONFIG_PRODUCTION"      = "true"
+    # Private endpoint connectivity settings (critical for VNet integration)
+    "WEBSITE_VNET_ROUTE_ALL"     = "1"
+    "WEBSITE_DNS_SERVER"         = "168.63.129.16"
   }
 
   tags = var.tags
